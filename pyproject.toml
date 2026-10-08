@@ -1,0 +1,27 @@
+[project]
+name = "building-energy"
+version = "0.1.0"
+description = "Predicting energy use of Seattle non-residential buildings from structural features"
+readme = "README.md"
+authors = [
+    { name = "Anne Delpla", email = "dapitch666@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "pandas>=3.0.6",
+    "scikit-learn>=1.9.1",
+    "seaborn>=0.13.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+    "nbstripout>=0.9.1",
+    "pre-commit>=4.6.2",
+    "ruff>=0.16.10",
+]
