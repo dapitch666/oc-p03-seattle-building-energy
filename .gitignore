@@ -17,6 +17,7 @@ wheels/
 
 # IDE
 .idea/
+.vscode/
 
 # Data files
 data/*
