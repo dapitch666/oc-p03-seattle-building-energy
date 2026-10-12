@@ -32,7 +32,7 @@ The work covers three questions:
 
 ```sh
 uv sync
-uv run pre-commit install   # contributors only: ruff + nbstripout hooks
+uv run pre-commit install   # contributors only: ruff hooks
 ```
 
 Then open the notebooks with the `.venv` kernel (in VS Code: *Select Kernel* →
@@ -41,7 +41,7 @@ Then open the notebooks with the `.venv` kernel (in VS Code: *Select Kernel* →
 ## Data
 
 The dataset is the **2016 Building Energy Benchmarking** survey published by
-the City of Seattle on its open data portal, and provided by OpenClassrooms
+the City of Seattle on its [open data portal](https://data.seattle.gov/Built-Environment/Building-Energy-Benchmarking-Data-2015-Present/teqw-tu6e/about_data), and provided by OpenClassrooms
 with the project brief. It describes 3,376 properties with 46 columns:
 identification and location, structure (floor area, floors, construction
 year), property uses, ENERGY STAR score, and measured energy use and
