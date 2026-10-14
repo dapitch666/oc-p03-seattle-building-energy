@@ -56,13 +56,18 @@ data/
     └── 2016_Building_Energy_Benchmarking.csv
 ```
 
+`data/processed/` is generated: running `notebooks/01_eda.ipynb` writes the
+cleaned dataset (`buildings_cleaned.parquet`) that
+`notebooks/02_feature_engineering.ipynb` loads, so run the notebooks in order.
+
 ## Project structure
 
 ```text
 .
 ├── data/                   # git-ignored, see "Data"
 ├── notebooks/
-│   └── 01_eda.ipynb        # exploratory data analysis
+│   ├── 01_eda.ipynb                  # exploratory data analysis, writes data/processed/
+│   └── 02_feature_engineering.ipynb  # feature engineering, reads data/processed/
 ├── scripts/                # command-line entry points
 ├── src/
 │   └── building_energy/    # reusable code (loading, cleaning, features, models)
@@ -75,7 +80,7 @@ visualize the results.
 
 ## Roadmap
 
-- [ ] Exploratory data analysis
+- [x] Exploratory data analysis
 - [ ] Feature engineering
 - [ ] Feature preparation for modeling
 - [ ] Model comparison (cross-validation)
