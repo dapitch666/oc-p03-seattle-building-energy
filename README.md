@@ -58,7 +58,9 @@ data/
 
 `data/processed/` is generated: running `notebooks/01_eda.ipynb` writes the
 cleaned dataset (`buildings_cleaned.parquet`) that
-`notebooks/02_feature_engineering.ipynb` loads, so run the notebooks in order.
+`notebooks/02_feature_engineering.ipynb` loads, and that notebook writes
+`buildings_feature_engineered.parquet` for `notebooks/03_modeling.ipynb`, so run
+the notebooks in order.
 
 ## Project structure
 
@@ -67,21 +69,16 @@ cleaned dataset (`buildings_cleaned.parquet`) that
 ├── data/                   # git-ignored, see "Data"
 ├── notebooks/
 │   ├── 01_eda.ipynb                  # exploratory data analysis, writes data/processed/
-│   └── 02_feature_engineering.ipynb  # feature engineering, reads data/processed/
-├── scripts/                # command-line entry points
-├── src/
-│   └── building_energy/    # reusable code (loading, cleaning, features, models)
+│   ├── 02_feature_engineering.ipynb  # feature engineering, reads data/processed/
+│   └── 03_modeling.ipynb             # train/test split, preprocessing, model comparison
 ├── pyproject.toml
 └── uv.lock
 ```
 
-The logic lives in the `building_energy` package; notebooks call it and
-visualize the results.
-
 ## Roadmap
 
 - [x] Exploratory data analysis
-- [ ] Feature engineering
-- [ ] Feature preparation for modeling
-- [ ] Model comparison (cross-validation)
+- [x] Feature engineering
+- [x] Feature preparation for modeling
+- [x] Model comparison (cross-validation)
 - [ ] Hyperparameter tuning and feature importance
