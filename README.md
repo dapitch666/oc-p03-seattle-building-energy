@@ -32,11 +32,40 @@ The work covers three questions:
 
 ```sh
 uv sync
-uv run pre-commit install   # contributors only: ruff hooks
 ```
 
 Then open the notebooks with the `.venv` kernel (in VS Code: *Select Kernel* →
 *Python Environments* → `.venv`).
+
+### Development setup
+
+To work on the code after cloning, install the ruff hooks (lint and format,
+notebooks included) and the nbstripout git filter:
+
+```sh
+uv run pre-commit install
+
+uv run nbstripout --install --attributes .gitattributes
+NB="$(pwd)/.venv/bin/python -m nbstripout --keep-output --keep-count"
+git config filter.nbstripout.clean "$NB"
+git config diff.ipynb.textconv "$NB -t"
+git config filter.nbstripout.extrakeys "metadata.kernelspec metadata.language_info.version"
+```
+
+The filter strips the metadata that the editor rewrites (kernel, Python
+version) from the committed notebooks and from the diffs, but it keeps the
+outputs and the execution counts, because the notebooks are deliverables.
+
+- `.gitattributes` is versioned and applies the filter to every notebook. The
+  filter itself lives in `.git/config`, which is not versioned: run these
+  commands once after cloning.
+- `nbstripout --install` does not record any option, hence the `git config`
+  lines. Run them again after any new `--install`.
+- `git status` may still list a notebook that the editor only re-saved. Its
+  `git diff` is empty, and `git add` clears it.
+- VS Code compares notebooks without the filter, so its diff view still shows
+  the metadata changes. To hide them, add `"notebook.diff.ignoreMetadata": true`
+  to the VS Code `settings.json`.
 
 ## Data
 
@@ -81,4 +110,4 @@ the notebooks in order.
 - [x] Feature engineering
 - [x] Feature preparation for modeling
 - [x] Model comparison (cross-validation)
-- [ ] Hyperparameter tuning and feature importance
+- [x] Hyperparameter tuning and feature importance
