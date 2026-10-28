@@ -22,3 +22,4 @@ wheels/
 # Data files
 data/*
 deliverables/*
+notebooks/presentation_figures.ipynb

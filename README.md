@@ -19,7 +19,7 @@ The work covers three questions:
 1. **Exploration**: what does the building stock look like, and which
    buildings are relevant or reliable for modeling?
 2. **Modeling**: how well can supervised models predict a building's energy
-   use, compared with a naive baseline?
+   use, compared with a naive baseline and an energy expert's rule of thumb?
 3. **Interpretation**: which characteristics drive the predictions of the
    selected model?
 
@@ -103,6 +103,22 @@ the notebooks in order.
 ├── pyproject.toml
 └── uv.lock
 ```
+
+## Results
+
+- **Reference to beat**: an energy expert's rule of thumb, area × median energy
+  use per sq ft of the property type, learned on the training set.
+- **Model selection** (5-fold cross-validation, MAPE): Ridge 62% against 66% for
+  the rule, ahead on every fold. The random forest (70%) and CatBoost (66%,
+  65% once tuned) overfit and do not beat the rule steadily. Ridge is selected
+  before opening the test set.
+- **Test set**: Ridge reaches 64% MAPE, in line with cross-validation. Its R²
+  drops from 0.72 to 0.22, and every model, the rule included, falls to about
+  0.2: three properties (a power plant with labs and two data centers) carry
+  94% of the squared error.
+- **Interpretation**: area and property type carry 94% of Ridge's permutation
+  importance. The model rediscovers the rule of thumb. The next step is a
+  feature that flags energy-intensive uses, from `ListOfAllPropertyUseTypes`.
 
 ## Roadmap
 
